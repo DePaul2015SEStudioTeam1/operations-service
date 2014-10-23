@@ -1,1 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean name="/OperationsService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" value="operationsService"/>
+        <property name="serviceInterface" value="edu.depaul.service.OperationsService"/>
+    </bean>
+</beans>

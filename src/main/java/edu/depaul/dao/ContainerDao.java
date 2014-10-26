@@ -3,10 +3,17 @@
  */
 package edu.depaul.dao;
 
+
 /**
  * @author ptrzyna
- *
  */
-public interface ContainerDao {
+public interface ContainerDao<Container> {
 
+	/**
+	 * Stores a container
+	 * 
+	 * @param container	container instance we want to store
+	 */
+	void store(Container container);
+	
 }

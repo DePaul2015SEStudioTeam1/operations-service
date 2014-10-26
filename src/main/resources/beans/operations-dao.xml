@@ -18,7 +18,7 @@
 
     <tx:annotation-driven transaction-manager="operationsTransactionManager"/>
     
-    <bean id="containerDao" class="edu.depaul.dao.ContainerDaoHibernate">
+    <bean id="containerDao" class="edu.depaul.operations.dao.ContainerDaoHibernate">
         <constructor-arg name="sessionFactory" ref="operationsSessionFactory"/>
     </bean>
 

@@ -1,13 +1,13 @@
 /**
  * 
  */
-package edu.depaul.dao;
+package edu.depaul.operations.dao;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.depaul.domain.Container;
+import edu.depaul.operations.domain.Container;
 
 /**
  * @author ptrzyna
@@ -24,7 +24,7 @@ public class ContainerDaoHibernate implements ContainerDao<Container> {
 	}
 
 	/* (non-Javadoc)
-	 * @see edu.depaul.dao.ContainerDao#store(edu.depaul.domain.Container)
+	 * @see edu.depaul.operations.operations.dao.ContainerDao#store(edu.depaul.operations.operations.domain.Container)
 	 */
 	@Override
 	public void store(Container container) {

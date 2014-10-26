@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="edu.depaul.domain.Container" table="Container">
+	<class name="edu.depaul.operations.operations.domain.Container" table="Container">
 		<id column="id" name="id" type="java.lang.Long"/>
 		
 		<property column="agent_id" name="agentId" type="java.lang.String" />

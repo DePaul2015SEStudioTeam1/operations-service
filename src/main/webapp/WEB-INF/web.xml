@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Applications 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
-<web-app>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+                             http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>operations-service</display-name>
+	<description>Spring service</description>
 
-    <display-name>operations-service</display-name>
-    <description>Spring service</description>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/beans/operations-config.xml</param-value>
+	</context-param>
 
-    <servlet>
-        <servlet-name>remoting</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+	<servlet>
+		<servlet-name>remoting</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 
-    <servlet-mapping>
-        <servlet-name>remoting</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-    
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
-    
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:/beans/operations-config.xml</param-value>
-    </context-param>
+	<servlet-mapping>
+		<servlet-name>remoting</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
 </web-app> 

@@ -24,7 +24,7 @@ public class ContainerDaoHibernate implements ContainerDao<Container> {
 	}
 
 	/* (non-Javadoc)
-	 * @see edu.depaul.operations.operations.dao.ContainerDao#store(edu.depaul.operations.operations.domain.Container)
+	 * @see edu.depaul.operations.dao.ContainerDao#store(edu.depaul.operations.domain.Container)
 	 */
 	@Override
 	public void store(Container container) {

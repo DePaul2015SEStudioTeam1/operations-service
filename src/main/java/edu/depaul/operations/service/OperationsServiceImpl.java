@@ -26,7 +26,7 @@ public class OperationsServiceImpl implements OperationsService<Container> {
 	}
 
 	/* (non-Javadoc)
-	 * @see edu.depaul.operations.operations.service.OperationsService#store(edu.depaul.operations.operations.model.Container)
+	 * @see edu.depaul.operations.service.OperationsService#store(edu.depaul.operations.model.Container)
 	 */
 	public void store(Container container) {
 		edu.depaul.operations.domain.Container domain = new edu.depaul.operations.domain.Container();

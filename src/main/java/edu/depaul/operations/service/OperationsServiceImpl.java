@@ -30,7 +30,30 @@ public class OperationsServiceImpl implements OperationsService<Container> {
 	 */
 	public void store(Container container) {
 		edu.depaul.operations.domain.Container domain = new edu.depaul.operations.domain.Container();
-		// copy over
+		
+		domain.setAgentId(container.getAgentId());
+		
+		domain.setCpuCount(container.getCpuCount());
+		domain.setCpuModel(container.getCpuModel());
+		domain.setCpuVendor(container.getCpuVendor());
+		
+		domain.setMemTotal(container.getMemTotal());
+		domain.setMemFree(container.getMemFree());
+		domain.setMemUsed(container.getMemUsed());
+		
+		domain.setOsDescription(container.getOsDescription());
+		domain.setOsDataModel(container.getOsDataModel());
+		domain.setOsName(container.getOsName());
+		
+		domain.setPrimaryIpAddress(container.getPrimaryIpAddress());
+		domain.setPrimaryMacAddress(container.getPrimaryMacAddress());
+		
+		domain.setHostName(container.getHostName());
+		
+		domain.setDiskSpaceTotal(container.getDiskSpaceTotal());
+		domain.setDiskSpaceFree(container.getDiskSpaceFree());
+		domain.setDiskSpaceUsed(container.getDiskSpaceUsed());
+		
 		containerDao.store(domain);
 	}
 

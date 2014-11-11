@@ -30,7 +30,7 @@ public class OperationsController {
 		this.operationsService = operationsService;
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/xxx", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Container> getAll() {
 		return operationsService.getAll();

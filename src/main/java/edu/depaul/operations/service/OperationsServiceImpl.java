@@ -8,7 +8,8 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.depaul.operations.converter.Converter;
+import edu.depaul.operations.converter.DomainContainerConverter;
+import edu.depaul.operations.converter.ModelContainerConverter;
 import edu.depaul.operations.dao.ContainerDao;
 import edu.depaul.operations.model.Container;
 
@@ -21,22 +22,20 @@ import edu.depaul.operations.model.Container;
 public class OperationsServiceImpl implements OperationsService<Container> {
 	
 	private ContainerDao<edu.depaul.operations.domain.Container> containerDao;
-	private Converter<Container, edu.depaul.operations.domain.Container> domainConverter;
-	private Converter<edu.depaul.operations.domain.Container, Container> modelConverter;
+	private DomainContainerConverter domainConverter;
+	private ModelContainerConverter modelConverter;
 	
 	/**
 	 * @param modelConverter the modelConverter to set
 	 */
-	public void setModelConverter(
-			Converter<edu.depaul.operations.domain.Container, Container> modelConverter) {
+	public void setModelConverter(ModelContainerConverter modelConverter) {
 		this.modelConverter = modelConverter;
 	}
 	
 	/**
 	 * @param domainConverter the domainConverter to set
 	 */
-	public void setDomainConverter(
-			Converter<Container, edu.depaul.operations.domain.Container> domainConverter) {
+	public void setDomainConverter(DomainContainerConverter domainConverter) {
 		this.domainConverter = domainConverter;
 	}
 	
@@ -51,7 +50,7 @@ public class OperationsServiceImpl implements OperationsService<Container> {
 	 * @see edu.depaul.operations.service.OperationsService#store(edu.depaul.operations.model.Container)
 	 */
 	public void store(Container container) {
-		edu.depaul.operations.domain.Container domain = domainConverter.convert(container);
+		edu.depaul.operations.domain.Container domain = modelConverter.convert(container);
 		containerDao.store(domain);
 	}
 
@@ -64,7 +63,7 @@ public class OperationsServiceImpl implements OperationsService<Container> {
 		List<edu.depaul.operations.domain.Container> domainContainers = containerDao.getAll(); 
 		List<Container> modelContainers = new ArrayList<Container>();
 		for(edu.depaul.operations.domain.Container domain : domainContainers) {
-			modelContainers.add(modelConverter.convert(domain));
+			modelContainers.add(domainConverter.convert(domain));
 		}
 		
 		return modelContainers; 
@@ -79,7 +78,7 @@ public class OperationsServiceImpl implements OperationsService<Container> {
 		List<edu.depaul.operations.domain.Container> domainContainers = containerDao.get(id, count); 
 		List<Container> modelContainers = new ArrayList<Container>();
 		for(edu.depaul.operations.domain.Container domain : domainContainers) {
-			modelContainers.add(modelConverter.convert(domain));
+			modelContainers.add(domainConverter.convert(domain));
 		}
 		
 		return modelContainers; 

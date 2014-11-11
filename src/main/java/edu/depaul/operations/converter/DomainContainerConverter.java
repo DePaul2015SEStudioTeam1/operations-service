@@ -3,16 +3,15 @@
  */
 package edu.depaul.operations.converter;
 
-import edu.depaul.operations.domain.Container;
 
 /**
  * @author ptrzyna
  *
  */
-public class DomainContainerConverter implements Converter<Container, edu.depaul.operations.model.Container> {
+public class DomainContainerConverter implements Converter<edu.depaul.operations.domain.Container, edu.depaul.operations.model.Container> {
 
 	@Override
-	public edu.depaul.operations.model.Container convert(Container domain) {
+	public edu.depaul.operations.model.Container convert(edu.depaul.operations.domain.Container domain) {
 		edu.depaul.operations.model.Container model = new edu.depaul.operations.model.Container();
 		
 		model.setAgentId(domain.getAgentId());

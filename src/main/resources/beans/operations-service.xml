@@ -15,7 +15,12 @@
     
     <bean id="operationsService" class="edu.depaul.operations.service.OperationsServiceImpl">
         <property name="containerDao" ref="containerDao"/>
+        <property name="domainConverter" ref="domainContainerConverter"/>
+        <property name="modelConverter" ref="modelContainerConverter"/>
     </bean>
+    
+    <bean id="domainContainerConverter" class="edu.depaul.operations.converter.DomainContainerConverter"/>
+    <bean id="modelContainerConverter" class="edu.depaul.operations.converter.ModelContainerConverter"/>
 
 
 </beans>

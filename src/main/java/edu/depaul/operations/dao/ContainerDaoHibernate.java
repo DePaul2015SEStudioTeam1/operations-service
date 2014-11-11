@@ -3,6 +3,9 @@
  */
 package edu.depaul.operations.dao;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,6 +32,24 @@ public class ContainerDaoHibernate implements ContainerDao<Container> {
 	@Override
 	public void store(Container container) {
 		sessionFactory.getCurrentSession().saveOrUpdate(container);
+	}
+
+	/* (non-Javadoc)
+	 * @see edu.depaul.operations.dao.ContainerDao#getAll()
+	 */
+	@Override
+	public List<Container> getAll() {
+		Query query = sessionFactory.getCurrentSession().createQuery("from Container");
+		return query.list();
+	}
+
+	/* (non-Javadoc)
+	 * @see edu.depaul.operations.dao.ContainerDao#get(long, int)
+	 */
+	@Override
+	public List<Container> get(long id, int count) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from Container");
+		return query.list();	// TODO implement pagination
 	}
 	
 	

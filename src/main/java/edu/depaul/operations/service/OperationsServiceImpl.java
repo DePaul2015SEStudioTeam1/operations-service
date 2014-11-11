@@ -3,8 +3,12 @@
  */
 package edu.depaul.operations.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.depaul.operations.converter.Converter;
 import edu.depaul.operations.dao.ContainerDao;
 import edu.depaul.operations.model.Container;
 
@@ -17,6 +21,24 @@ import edu.depaul.operations.model.Container;
 public class OperationsServiceImpl implements OperationsService<Container> {
 	
 	private ContainerDao<edu.depaul.operations.domain.Container> containerDao;
+	private Converter<Container, edu.depaul.operations.domain.Container> domainConverter;
+	private Converter<edu.depaul.operations.domain.Container, Container> modelConverter;
+	
+	/**
+	 * @param modelConverter the modelConverter to set
+	 */
+	public void setModelConverter(
+			Converter<edu.depaul.operations.domain.Container, Container> modelConverter) {
+		this.modelConverter = modelConverter;
+	}
+	
+	/**
+	 * @param domainConverter the domainConverter to set
+	 */
+	public void setDomainConverter(
+			Converter<Container, edu.depaul.operations.domain.Container> domainConverter) {
+		this.domainConverter = domainConverter;
+	}
 	
 	/**
 	 * @param containerDao the containerDao to set
@@ -29,32 +51,38 @@ public class OperationsServiceImpl implements OperationsService<Container> {
 	 * @see edu.depaul.operations.service.OperationsService#store(edu.depaul.operations.model.Container)
 	 */
 	public void store(Container container) {
-		edu.depaul.operations.domain.Container domain = new edu.depaul.operations.domain.Container();
-		
-		domain.setAgentId(container.getAgentId());
-		
-		domain.setCpuCount(container.getCpuCount());
-		domain.setCpuModel(container.getCpuModel());
-		domain.setCpuVendor(container.getCpuVendor());
-		
-		domain.setMemTotal(container.getMemTotal());
-		domain.setMemFree(container.getMemFree());
-		domain.setMemUsed(container.getMemUsed());
-		
-		domain.setOsDescription(container.getOsDescription());
-		domain.setOsDataModel(container.getOsDataModel());
-		domain.setOsName(container.getOsName());
-		
-		domain.setPrimaryIpAddress(container.getPrimaryIpAddress());
-		domain.setPrimaryMacAddress(container.getPrimaryMacAddress());
-		
-		domain.setHostName(container.getHostName());
-		
-		domain.setDiskSpaceTotal(container.getDiskSpaceTotal());
-		domain.setDiskSpaceFree(container.getDiskSpaceFree());
-		domain.setDiskSpaceUsed(container.getDiskSpaceUsed());
-		
+		edu.depaul.operations.domain.Container domain = domainConverter.convert(container);
 		containerDao.store(domain);
+	}
+
+	/* (non-Javadoc)
+	 * @see edu.depaul.operations.service.OperationsService#getAll()
+	 */
+	@Override
+	public List<Container> getAll() {
+		
+		List<edu.depaul.operations.domain.Container> domainContainers = containerDao.getAll(); 
+		List<Container> modelContainers = new ArrayList<Container>();
+		for(edu.depaul.operations.domain.Container domain : domainContainers) {
+			modelContainers.add(modelConverter.convert(domain));
+		}
+		
+		return modelContainers; 
+	}
+
+	/* (non-Javadoc)
+	 * @see edu.depaul.operations.service.OperationsService#get(long, int)
+	 */
+	@Override
+	public List<Container> get(long id, int count) {
+		
+		List<edu.depaul.operations.domain.Container> domainContainers = containerDao.get(id, count); 
+		List<Container> modelContainers = new ArrayList<Container>();
+		for(edu.depaul.operations.domain.Container domain : domainContainers) {
+			modelContainers.add(modelConverter.convert(domain));
+		}
+		
+		return modelContainers; 
 	}
 
 }

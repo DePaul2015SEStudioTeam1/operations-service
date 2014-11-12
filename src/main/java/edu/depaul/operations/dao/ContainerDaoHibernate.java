@@ -48,8 +48,10 @@ public class ContainerDaoHibernate implements ContainerDao<Container> {
 	 */
 	@Override
 	public List<Container> get(long id, int count) {
-		Query query = sessionFactory.getCurrentSession().createQuery("from Container");
-		return query.list();	// TODO implement pagination
+		Query query = sessionFactory.getCurrentSession().createQuery("from Container where id > :id");
+		query.setLong("id", id);
+		query.setMaxResults(count);
+		return query.list();
 	}
 	
 	

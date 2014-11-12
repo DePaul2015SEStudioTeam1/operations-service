@@ -14,6 +14,7 @@ public class ModelContainerConverter implements Converter<edu.depaul.operations.
 	public edu.depaul.operations.domain.Container convert(edu.depaul.operations.model.Container model) {
 		edu.depaul.operations.domain.Container domain = new edu.depaul.operations.domain.Container();
 		
+		domain.setId(model.getId());
 		domain.setAgentId(model.getAgentId());
 		
 		domain.setCpuCount(model.getCpuCount());

@@ -5,6 +5,7 @@ package edu.depaul.operations.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +22,7 @@ import edu.depaul.operations.service.OperationsService;
 @RequestMapping("/containers")
 public class OperationsController {
 
-	private OperationsService<Container> operationsService;
+	@Autowired private OperationsService<Container> operationsService;
 	
 	/**
 	 * @param operationsService the operationsService to set
@@ -30,7 +31,7 @@ public class OperationsController {
 		this.operationsService = operationsService;
 	}
 	
-	@RequestMapping(value = "/xxx", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Container> getAll() {
 		return operationsService.getAll();

@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
-    <bean name="/OperationsService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+
+    <bean id="httpOperationsService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <property name="service" ref="operationsService"/>
         <property name="serviceInterface" value="edu.depaul.operations.service.OperationsService"/>
     </bean>
+    
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <value>
+                /OperationsService=httpOperationsService
+            </value>
+        </property>
+    </bean>
+    
 </beans>

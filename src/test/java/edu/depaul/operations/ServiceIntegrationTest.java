@@ -18,7 +18,12 @@ public class ServiceIntegrationTest {
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans/operations-client.xml");
 		OperationsService<Container> service = context.getBean("remoteOperationsService", OperationsService.class);
-		service.store(new Container());
+		
+		Container test = new Container();
+		test.setAgentId("test");
+		for(int i=0; i<11; i++) {
+			service.store(test);
+		}
 		
 	}
 	

@@ -53,10 +53,39 @@ public class OperationsServiceImpl implements OperationsService<Container> {
 		// TODO add versioning of db records to let hibernate do this automatically
 		edu.depaul.operations.domain.Container old = containerDao.findWithAgentId(container.getAgentId());
 		edu.depaul.operations.domain.Container domain = modelConverter.convert(container);
+		
 		if(old != null) {
-			domain.setId(old.getId());
+			merge(old, domain);
+			containerDao.store(old);
+			return;
 		}
+		
 		containerDao.store(domain);
+	}
+	
+	private void merge(edu.depaul.operations.domain.Container old, edu.depaul.operations.domain.Container domain) {
+		old.setAgentId(domain.getAgentId());
+		
+		old.setCpuCount(domain.getCpuCount());
+		old.setCpuModel(domain.getCpuModel());
+		old.setCpuVendor(domain.getCpuVendor());
+		
+		old.setMemTotal(domain.getMemTotal());
+		old.setMemFree(domain.getMemFree());
+		old.setMemUsed(domain.getMemUsed());
+		
+		old.setOsDescription(domain.getOsDescription());
+		old.setOsDataModel(domain.getOsDataModel());
+		old.setOsName(domain.getOsName());
+		
+		old.setPrimaryIpAddress(domain.getPrimaryIpAddress());
+		old.setPrimaryMacAddress(domain.getPrimaryMacAddress());
+		
+		old.setHostName(domain.getHostName());
+		
+		old.setDiskSpaceTotal(domain.getDiskSpaceTotal());
+		old.setDiskSpaceFree(domain.getDiskSpaceFree());
+		old.setDiskSpaceUsed(domain.getDiskSpaceUsed());
 	}
 
 	/* (non-Javadoc)

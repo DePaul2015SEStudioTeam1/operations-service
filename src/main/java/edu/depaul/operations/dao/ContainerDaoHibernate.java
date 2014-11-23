@@ -32,6 +32,7 @@ public class ContainerDaoHibernate implements ContainerDao<Container> {
 	@Override
 	public void store(Container container) {
 		sessionFactory.getCurrentSession().saveOrUpdate(container);
+		sessionFactory.getCurrentSession().flush();
 	}
 
 	/* (non-Javadoc)

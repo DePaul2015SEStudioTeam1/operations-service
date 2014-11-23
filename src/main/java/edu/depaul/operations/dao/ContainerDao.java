@@ -22,4 +22,11 @@ public interface ContainerDao<Container> {
 	
 	List<Container> get(long id, int count);
 	
+	/**
+	 * Gets record matching agent id
+	 * 
+	 * @param agentId	id of the agent we want to retrieve
+	 * @return container instance matching the id
+	 */
+	Container findWithAgentId(String agentId);
 }

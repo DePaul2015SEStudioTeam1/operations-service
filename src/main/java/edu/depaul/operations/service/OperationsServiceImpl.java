@@ -50,7 +50,12 @@ public class OperationsServiceImpl implements OperationsService<Container> {
 	 * @see edu.depaul.operations.service.OperationsService#store(edu.depaul.operations.model.Container)
 	 */
 	public void store(Container container) {
+		// TODO add versioning of db records to let hibernate do this automatically
+		edu.depaul.operations.domain.Container old = containerDao.findWithAgentId(container.getAgentId());
 		edu.depaul.operations.domain.Container domain = modelConverter.convert(container);
+		if(old != null) {
+			domain.setId(old.getId());
+		}
 		containerDao.store(domain);
 	}
 

@@ -53,6 +53,16 @@ public class ContainerDaoHibernate implements ContainerDao<Container> {
 		query.setMaxResults(count);
 		return query.list();
 	}
+
+	/* (non-Javadoc)
+	 * @see edu.depaul.operations.dao.ContainerDao#findWithAgentId(java.lang.String)
+	 */
+	@Override
+	public Container findWithAgentId(String agentId) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from Container where agentId = :agentId");
+		query.setString("agentId", agentId);
+		return (Container) query.uniqueResult();
+	}
 	
 	
 	
